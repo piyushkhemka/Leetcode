@@ -1,7 +1,5 @@
 class Solution {
 public:
-
-
     struct mycomp {
         bool operator() (const pair<int,int> &p1, const pair<int,int> &p2) {
             return p1.first > p2.first;
@@ -29,16 +27,11 @@ public:
             pair<int,int> top;
             pair<int,int> sec;
 
-
-
             top = pq.top();
             pq.pop();
 
             sec = pq.top();
             pq.pop();
-
-            // cout << top.first <<" " << top.second << endl;
-            // cout << sec.first <<" " << sec.second << endl;
 
             if (top.first <=sec.first && top.second >=sec.second)
                 pq.push({sec.first, sec.second});
@@ -53,14 +46,9 @@ public:
 
         }
 
-
-
         if(pq.size() == 1)
             res.push_back(pq.top());
 
-
         return res.size();
-
-
     }
 };
