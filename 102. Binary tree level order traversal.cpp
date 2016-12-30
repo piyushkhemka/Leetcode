@@ -13,8 +13,110 @@ The solution is easy to understand but has a bad time complexity.
 Better solutions can be found at :
 https://leetcode.com/discuss/15521/one-of-c-solutions-preorder
 https://leetcode.com/discuss/77205/c-4ms-simple-recursive-solution
+-------
 
+// Iterative solution
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
  */
+class Solution {
+
+
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int > > res;
+
+        if (!root)
+            return res;
+
+       queue<TreeNode *> q;
+       q.push(root);
+       int level = -1;
+       while(!q.empty()) {
+
+           level++;
+           int count = q.size();
+
+           while(count) {
+               TreeNode *cur = q.front();
+               q.pop();
+               --count;
+
+               if(res.size() < level+1)
+                    res.push_back(vector<int> ());
+
+
+               res[level].push_back(cur->val);
+
+               if(cur->left) {
+                   q.push(cur->left);
+               }
+
+               if(cur->right) {
+                   q.push(cur->right);
+               }
+
+
+           }
+
+       }
+
+       return res;
+
+    }
+};
+
+
+
+
+--------
+ */
+29th Dec 2016
+ /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+  * };
+  */
+ class Solution {
+
+     void helper(vector<vector<int > > &res, TreeNode *root, int level) {
+
+         if(!root)
+             return;
+
+         if(res.size() < level+1)
+             res.push_back(vector<int> ());
+
+         res[level].push_back(root->val);
+
+
+         helper(res, root->left, level+1);
+         helper(res, root->right, level+1);
+     }
+
+ public:
+     vector<vector<int>> levelOrder(TreeNode* root) {
+         vector<vector<int > > res;
+
+         if (!root)
+             return res;
+
+         helper(res, root, 0);
+         return res;
+     }
+ };
 
 
 -----
