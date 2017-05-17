@@ -20,24 +20,21 @@ public:
 
         int start = 0;
         int end = 0;
+        int len = s.length();
 
-        for(int i = 0; i<s.length(), end < s.length(); i++) {
+        while(end < len) {
 
             k = n;
 
             start = end;
 
-            while(k-- && end < s.length())
+            while(k-- && end < len)
                 end++;
 
             reverse(s, start, end-1);
 
-            start = end;
+            end = end + n;
 
-            k = n;
-            while(k-- && end < s.length()) {
-                end++;
-            }
 
         }
 
