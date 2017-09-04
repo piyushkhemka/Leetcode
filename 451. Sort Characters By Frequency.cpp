@@ -30,3 +30,35 @@ public:
 
     }
 };
+
+
+----------
+
+class Solution {
+public:
+    string frequencySort(string s) {
+
+        unordered_map<char, int> m;
+        string res = "";
+
+        for(int i = 0;i<s.length(); ++i) {
+            m[s[i]]++;
+        }
+
+        vector<pair<char, int> > v;
+
+        for(auto i:m) {
+            v.push_back(make_pair(i.first, i.second));
+        }
+
+        sort(v.begin(), v.end(), [] (const pair<char, int> &i1, const pair<char, int> &i2) {return i1.second > i2.second;});
+
+        for(auto i: v) {
+            while(i.second--)
+                res += i.first;
+        }
+
+        return res;
+
+    }
+};
